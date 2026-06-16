@@ -4,6 +4,8 @@ Grafana panel plugin that renders a line-by-line text diff from two columns. The
 user-facing documentation shown in the Grafana catalog lives in
 [`src/README.md`](./src/README.md).
 
+![Text Diff panel](src/img/screenshot-diff.png)
+
 This repository is built with
 [`@grafana/create-plugin`](https://github.com/grafana/plugin-tools) and follows
 the standard Grafana plugin tooling.
