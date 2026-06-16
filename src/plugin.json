@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
+  "type": "panel",
+  "name": "Text Diff",
+  "id": "earthly-textdiff-panel",
+  "info": {
+    "keywords": ["diff", "text", "compare", "viewer"],
+    "description": "Render a line-by-line text diff from two columns returned by a query.",
+    "author": {
+      "name": "Earthly Technologies",
+      "url": "https://earthly.dev"
+    },
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "links": [
+      { "name": "Website", "url": "https://earthly.dev" },
+      { "name": "GitHub", "url": "https://github.com/earthly/earthly-textdiff-panel" },
+      { "name": "Report an issue", "url": "https://github.com/earthly/earthly-textdiff-panel/issues" },
+      { "name": "License", "url": "https://github.com/earthly/earthly-textdiff-panel/blob/main/LICENSE" }
+    ],
+    "screenshots": [
+      { "name": "Text diff", "path": "img/screenshot-diff.png" }
+    ],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaDependency": ">=10.4.0",
+    "plugins": []
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "id": 1,
+      "options": { "previousField": "", "currentField": "" },
+      "targets": [
+        {
+          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "refId": "A",
+          "scenarioId": "raw_frame",
+          "rawFrameContent": "[{\"columns\":[{\"text\":\"previous\",\"type\":\"string\"},{\"text\":\"current\",\"type\":\"string\"}],\"rows\":[[\"alpha\\nbeta\\ngamma\",\"alpha\\nbeta changed\\ngamma\"]]}]"
+        }
+      ],
+      "title": "Text diff",
+      "type": "earthly-textdiff-panel"
+    },
+    {
+      "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "id": 2,
+      "options": { "previousField": "", "currentField": "" },
+      "targets": [
+        {
+          "datasource": { "type": "grafana-testdata-datasource", "uid": "trlxrdZVk" },
+          "refId": "A",
+          "scenarioId": "no_data_points"
+        }
+      ],
+      "title": "Empty",
+      "type": "earthly-textdiff-panel"
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "title": "Provisioned textdiff dashboard",
+  "uid": "b6610ab3-816b-4649-9909-a6bf32605b8c",
+  "version": 1
+}
