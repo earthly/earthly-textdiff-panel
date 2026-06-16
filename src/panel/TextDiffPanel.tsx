@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
-import { PanelProps } from '@grafana/data';
+import { GrafanaTheme2, PanelProps } from '@grafana/data';
 import { css } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
-import { GrafanaTheme2 } from '@grafana/data';
 import { diffLines } from 'diff';
 import { TextDiffOptions } from '../types';
 import { pickTexts } from '../utils/pickTexts';

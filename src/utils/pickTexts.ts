@@ -13,9 +13,9 @@ function tryPrettyPrint(s: string): string {
 }
 
 function toString(v: unknown): string {
-  if (v == null) return '';
-  if (typeof v === 'string') return tryPrettyPrint(v);
-  if (typeof v === 'object') return JSON.stringify(v, null, 2);
+  if (v == null) {return '';}
+  if (typeof v === 'string') {return tryPrettyPrint(v);}
+  if (typeof v === 'object') {return JSON.stringify(v, null, 2);}
   return String(v);
 }
 
@@ -30,7 +30,7 @@ export function pickTexts(
   currentField?: string,
 ): { previous: string; current: string } | undefined {
   for (const frame of frames) {
-    if (frame.fields.length < 2 || frame.length < 1) continue;
+    if (frame.fields.length < 2 || frame.length < 1) {continue;}
 
     const prevF = previousField
       ? frame.fields.find((f) => f.name === previousField)
@@ -39,7 +39,7 @@ export function pickTexts(
       ? frame.fields.find((f) => f.name === currentField)
       : frame.fields[1];
 
-    if (!prevF || !currF) continue;
+    if (!prevF || !currF) {continue;}
 
     return {
       previous: toString(prevF.values[0]),
