@@ -26,8 +26,7 @@ npm run e2e       # end-to-end tests (Playwright)
 Pushing a `v*` tag triggers `.github/workflows/release.yml`, which builds, signs
 (via `@grafana/sign-plugin`), and packages the plugin. Signing requires a
 `GRAFANA_ACCESS_POLICY_TOKEN` repository secret, created from a Grafana Cloud
-access policy (scope `plugins:write`) under the `earthly` org. The plugin id is
-`earthly-textdiff-panel`, so the signing org slug must be `earthly`.
+access policy (scope `plugins:write`) under the `earthly` org.
 
 ## License
 
