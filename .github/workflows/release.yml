@@ -23,4 +23,4 @@ jobs:
         with:
           # Access policy token (scope plugins:write) stored as a repo secret.
           # https://grafana.com/developers/plugin-tools/publish-a-plugin/sign-a-plugin#generate-an-access-policy-token
-          policy_token: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
+          policy_token: ${{ secrets.GRAFANA_CLOUD_SIGNING_TOKEN }}
