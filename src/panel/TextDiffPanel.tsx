@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react';
 import { GrafanaTheme2, PanelProps } from '@grafana/data';
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { useStyles2 } from '@grafana/ui';
 import { diffLines } from 'diff';
 import { TextDiffOptions } from '../types';
 import { pickTexts } from '../utils/pickTexts';
-import './styles.css';
 
 type Props = PanelProps<TextDiffOptions>;
 
@@ -17,49 +16,73 @@ const getStyles = (theme: GrafanaTheme2) => ({
     flexDirection: 'column',
     boxSizing: 'border-box',
   }),
+  root: css({
+    height: '100%',
+    width: '100%',
+    overflow: 'auto',
+    scrollbarWidth: 'thin',
+  }),
+  pre: css({
+    margin: 0,
+    fontFamily: 'monospace !important',
+    fontSize: '12px !important',
+    lineHeight: 1.4,
+  }),
+  line: css({
+    padding: '0 8px',
+    whiteSpace: 'pre',
+  }),
+  lineAdded: css({
+    color: '#a6e3a1',
+    background: 'rgba(166, 227, 161, 0.1)',
+  }),
+  lineRemoved: css({
+    color: '#f38ba8',
+    background: 'rgba(243, 139, 168, 0.1)',
+  }),
 });
-
-function escapeHtml(s: string): string {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
 
 export const TextDiffPanel: React.FC<Props> = ({ data, options }) => {
   const styles = useStyles2(getStyles);
 
-  const html = useMemo(() => {
+  const content = useMemo(() => {
     const texts = pickTexts(data?.series ?? [], options.previousField, options.currentField);
     if (!texts) {
-      return '<em>No data. Query must return at least 1 row with 2 columns.</em>';
+      return <em>No data. Query must return at least 1 row with 2 columns.</em>;
     }
 
     const parts = diffLines(texts.previous, texts.current);
-    const lines: string[] = ['<pre style="font-family: monospace !important; font-size: 12px !important; line-height: 1.4; margin: 0;">'];
+    const rows: React.ReactNode[] = [];
+    let key = 0;
 
     for (const part of parts) {
-      let cls = 'td-line';
+      let className = styles.line;
       let prefix = ' ';
 
       if (part.added) {
-        cls += ' td-line--added';
+        className = cx(styles.line, styles.lineAdded);
         prefix = '+';
       } else if (part.removed) {
-        cls += ' td-line--removed';
+        className = cx(styles.line, styles.lineRemoved);
         prefix = '-';
       }
 
       const partLines = part.value.replace(/\n$/, '').split('\n');
       for (const line of partLines) {
-        lines.push(`<div class="${cls}">${prefix} ${escapeHtml(line)}</div>`);
+        rows.push(
+          <div key={key++} className={className}>
+            {prefix} {line}
+          </div>,
+        );
       }
     }
 
-    lines.push('</pre>');
-    return lines.join('');
-  }, [data?.series, options.previousField, options.currentField]);
+    return <pre className={styles.pre}>{rows}</pre>;
+  }, [data?.series, options.previousField, options.currentField, styles]);
 
   return (
     <div className={styles.container}>
-      <div className="textDiffRoot" dangerouslySetInnerHTML={{ __html: html }} />
+      <div className={styles.root}>{content}</div>
     </div>
   );
 };
